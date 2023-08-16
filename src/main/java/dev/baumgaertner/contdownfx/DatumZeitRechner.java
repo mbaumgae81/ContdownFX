@@ -1,13 +1,19 @@
 package dev.baumgaertner.contdownfx;
 
-import java.text.ParseException;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 
+/**
+ *
+ * Alle benötigten Methoden zur verwendung des Countdown Timers
+ *
+ */
 public class DatumZeitRechner {
 
     public static String rechne(LocalDate date, LocalTime time) {
-//        LocalDateTime dif = LocalDateTime.of(date, time);
+        /**
+         * Gebe die restzeit als String aus
+         */
         Duration d = DatumPlusZeit(date, time);
         long days = d.toDays();
         d = d.minusDays(days);
@@ -17,10 +23,10 @@ public class DatumZeitRechner {
         d = d.minusMinutes(minutes);
         long seconds = d.getSeconds();
 
-        return (days == 0 ? "" : days + " days,") +
-                (hours == 0 ? "" : hours + " hours,") +
-                (minutes == 0 ? "" : minutes + " minutes,") +
-                (seconds == 0 ? "" : seconds + " seconds");
+        return (days == 0 ? "" : days + " tage,") +
+                (hours == 0 ? "" : hours + " stunden,") +
+                (minutes == 0 ? "" : minutes + " minuten,") +
+                (seconds == 0 ? "" : seconds + " sekunden");
     }
 
     public static Duration DatumPlusZeit(LocalDate date, LocalTime time) {
@@ -32,6 +38,11 @@ public class DatumZeitRechner {
     }
 
     public static boolean checkZeitEingabe(String zeitEingabe) {
+
+        /**
+         * Prüfe ob sich parsen lässt ansonsten wird abgefangen und mit false rückgegeben
+         * Gibt Info auf
+         */
         LocalTime toCheck = null;
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
         try {

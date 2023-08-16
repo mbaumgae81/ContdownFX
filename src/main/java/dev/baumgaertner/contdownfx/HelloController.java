@@ -46,31 +46,31 @@ public class HelloController {
 
 
     public void countDownRun(LocalDate zielDatum) throws InterruptedException {
-        System.out.println(" im countdown");
-        System.out.println(!DatumZeitRechner.DatumPlusZeit(zielDatum, DatumZeitRechner.stringToTime(zeitEingabe)).isNegative());
-
         countdown.setFont(new Font("Arial", 25));
-        zeit.setDisable(true);
-        datePick.setDisable(true);
+        zeit.setDisable(true);                  // Deaktiviere
+        datePick.setDisable(true);              //
         animRun = true;
 
-        new AnimationTimer() {
+        new AnimationTimer() {                  // JavaFX Based zur regelmässigen änderungen auf der GUI
 
             @Override
             public void handle(long l) {
-
+                /**
+                 * Schreibe aktuelle restzeit auf Label
+                 * bei jedem AnimationTimer durchlauf
+                 */
                 countdown.setText(DatumZeitRechner.rechne(zielDatum, DatumZeitRechner.stringToTime(zeitEingabe)));
 
 
                 LocalDateTime temp = DatumZeitRechner.DatumZeitToLDT(zielDatum, DatumZeitRechner.stringToTime(zeitEingabe));
 
-                if (temp.isBefore(LocalDateTime.now())) {
+                if (temp.isBefore(LocalDateTime.now())) {       // Ist der Timer Beendet ?
                     stop();
 
                     countdown.setText(" Ende ");
                 }
 
-                if (!animRun) {
+                if (!animRun) {                             // Prüfe ob per Button gestoppt wurde
                     stop();
                 }
             }
@@ -79,16 +79,16 @@ public class HelloController {
     }
 
 
-    public void onStopButtunClick(ActionEvent event) {
+    public void onStopButtonClick(ActionEvent event) {
 
         animRun = false;
-        zeit.setDisable(false);
-        datePick.setDisable(false);
+        zeit.setDisable(false);                     // Aktiviere die eingabe wieder
+        datePick.setDisable(false);                 // DatePick und Zeit
 
     }
 
     public void clearZeitEingabe(){
-        zeit.setText("");
+        zeit.setText("");                           // beim Click in das eingabe feld wird der String geleert
 
     }
 }
